@@ -221,4 +221,5 @@ public class AuthRestController extends BaseController {
 	public void callbackQQ(HttpServletRequest request) {
 		logger.info("callback - callback qq. request={}", request);
 	}
+
 }

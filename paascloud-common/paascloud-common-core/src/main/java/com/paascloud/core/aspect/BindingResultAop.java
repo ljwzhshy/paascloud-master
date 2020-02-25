@@ -45,6 +45,15 @@ public class BindingResultAop {
 	 */
 	@Before("validateAnnotation()")
 	public void doBefore() {
+
+
+
+
+
+
+
+
+
 	}
 
 	/**
