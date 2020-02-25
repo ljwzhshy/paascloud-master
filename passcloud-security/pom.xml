@@ -11,6 +11,9 @@
 
     <groupId>com.liuzm.paascloud</groupId>
     <artifactId>com.liuzm.paascloud.security</artifactId>
+    <modules>
+        <module>paascloud-security-core</module>
+    </modules>
 
 
 </project>
