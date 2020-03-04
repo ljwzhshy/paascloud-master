@@ -3,9 +3,11 @@ package com.paascloud.security.core.authorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
+import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import java.io.IOException;
 
@@ -17,7 +19,7 @@ import java.io.IOException;
  * @author luojiawei
  */
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
-    @Autowired
+    @Resource(name="MySecurityMetadataSource")
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
     @Autowired
     public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
@@ -32,7 +34,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 
     @Override
     public SecurityMetadataSource obtainSecurityMetadataSource() {
-        return null;
+        return this.securityMetadataSource;
     }
 
     @Override
@@ -40,7 +42,14 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         FilterInvocation fi = new FilterInvocation(servletRequest, servletResponse, filterChain);
         this.invoke(fi);
     }
-
+    public void invoke(FilterInvocation fi) throws IOException, ServletException {
+        InterceptorStatusToken token = super.beforeInvocation(fi);
+        try {
+            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+        } finally {
+            super.afterInvocation(token, null);
+        }
+    }
     @Override
     public void destroy() {
 

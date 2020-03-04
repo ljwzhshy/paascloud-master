@@ -1,8 +1,12 @@
 package com.paascloud.security.core.authorize;
 
+import com.paascloud.provider.model.dto.user.Perm;
+import com.paascloud.provider.service.UacUserService;
 import com.xiaoleilu.hutool.util.StrUtil;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.stereotype.Component;
 
 import java.security.Permission;
 import java.util.*;
@@ -13,6 +17,7 @@ import java.util.*;
  *
  * @author luojiawei
  */
+@Component("MySecurityMetadataSource")
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
     private UacUserService uacUserService;
     private Map<String, Collection<ConfigAttribute>> map = null;
@@ -22,15 +27,15 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         Collection<ConfigAttribute> configAttributes;
         ConfigAttribute cfg;
         // 获取启用的权限操作请求
-        List<Permission> permissions = uacUserService.(CommonConstant.PERMISSION_OPERATION, CommonConstant.STATUS_NORMAL);
-        for (Permission permission : permissions) {
-            if (StrUtil.isNotBlank(permission.getTitle()) && StrUtil.isNotBlank(permission.getPath())) {
+        List<Perm> permissions = uacUserService.getAllPerms();
+        for (Perm permission : permissions) {
+            if (StrUtil.isNotBlank(permission.getResource()) && StrUtil.isNotBlank(permission.getPerm())) {
                 configAttributes = new ArrayList<>();
-                cfg = new SecurityConfig(permission.getTitle());
+                cfg = new SecurityConfig(permission.getResource());
                 //作为MyAccessDecisionManager类的decide的第三个参数
                 configAttributes.add(cfg);
                 //用权限的path作为map的key，用ConfigAttribute的集合作为value
-                map.put(permission.getPath(), configAttributes);
+                map.put(permission.getPerm(), configAttributes);
             }
         }
     }
