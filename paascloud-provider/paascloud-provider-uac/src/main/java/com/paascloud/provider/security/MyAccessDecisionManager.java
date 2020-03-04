@@ -1,4 +1,4 @@
-package com.paascloud.security.core.authorize;
+package com.paascloud.provider.security;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;

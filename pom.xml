@@ -23,8 +23,7 @@
     <module>paascloud-common</module>
     <module>paascloud-provider</module>
     <module>paascloud-generator</module>
-    <module>passcloud-security</module>
-  </modules>
+   </modules>
 
   <developers>
     <developer>

@@ -1,4 +1,4 @@
-package com.paascloud.security.core.authorize;
+package com.paascloud.provider.security;
 
 import com.paascloud.provider.model.dto.user.Perm;
 import com.paascloud.provider.service.UacUserService;
@@ -8,7 +8,6 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
 
-import java.security.Permission;
 import java.util.*;
 
 /**
