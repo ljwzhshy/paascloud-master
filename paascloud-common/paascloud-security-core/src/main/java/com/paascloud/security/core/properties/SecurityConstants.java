@@ -6,8 +6,10 @@ package com.paascloud.security.core.properties;
  * @author paascloud.net@gmail.com
  */
 public interface SecurityConstants {
-
-
+	/**
+	 * spring social 拦截请求
+	 */
+	String DEFAULT_SPRINGSOCIAL_FILLTER_URL = "/auth/callback/**";
 	/**
 	 * 默认的处理验证码的url前缀
 	 */

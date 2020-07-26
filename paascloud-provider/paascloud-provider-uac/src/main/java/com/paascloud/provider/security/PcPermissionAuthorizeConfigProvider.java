@@ -26,6 +26,7 @@ public class PcPermissionAuthorizeConfigProvider implements AuthorizeConfigProvi
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		config
 				.anyRequest()
+				//security 自定义授权表达式
 				.access("@permissionService.hasPermission(authentication,request)");
 		return true;
 	}

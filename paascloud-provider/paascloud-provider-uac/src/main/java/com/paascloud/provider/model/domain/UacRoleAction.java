@@ -37,4 +37,7 @@ public class UacRoleAction implements Serializable {
 	@Id
 	@Column(name = "action_id")
 	private Long actionId;
+
+	@Column(name = "roleCode")
+	private String roleCode;
 }

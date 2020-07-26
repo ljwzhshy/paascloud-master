@@ -13,6 +13,7 @@ package com.paascloud.provider.mapper;
 
 import com.paascloud.core.mybatis.MyMapper;
 import com.paascloud.provider.model.domain.UacRole;
+import com.paascloud.provider.model.domain.UacRoleAction;
 import com.paascloud.provider.model.dto.role.BindUserDto;
 import com.paascloud.provider.model.vo.RoleVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -83,4 +84,6 @@ public interface UacRoleMapper extends MyMapper<UacRole> {
 	 * @return the list
 	 */
 	List<BindUserDto> selectAllNeedBindUser(@Param("superManagerRoleId") Long superManagerRoleId, @Param("currentUserId") Long currentUserId);
+
+	List<UacRoleAction> selectUserRoles(@Param("userId")Long userId);
 }

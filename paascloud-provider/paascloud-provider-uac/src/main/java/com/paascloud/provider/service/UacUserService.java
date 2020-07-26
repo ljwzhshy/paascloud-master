@@ -297,6 +297,14 @@ public interface UacUserService extends IService<UacUser> {
 	Collection<GrantedAuthority> loadUserAuthorities(Long userId);
 
 	/**
+	 * 获取用户角色编码
+	 * @param userId
+	 * @return
+	 */
+	Collection<GrantedAuthority> loadUserRole(Long userId);
+
+
+	/**
 	 * Handler login data.
 	 *
 	 * @param token     the token

@@ -15,10 +15,7 @@ import com.paascloud.core.enums.LogTypeEnum;
 import com.paascloud.core.support.BaseService;
 import com.paascloud.core.utils.RequestUtil;
 import com.paascloud.provider.manager.UserManager;
-import com.paascloud.provider.mapper.UacActionMapper;
-import com.paascloud.provider.mapper.UacMenuMapper;
-import com.paascloud.provider.mapper.UacUserMapper;
-import com.paascloud.provider.mapper.UacUserMenuMapper;
+import com.paascloud.provider.mapper.*;
 import com.paascloud.provider.model.domain.*;
 import com.paascloud.provider.model.dto.menu.UserMenuChildrenDto;
 import com.paascloud.provider.model.dto.menu.UserMenuDto;
@@ -60,6 +57,8 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserService {
+	@Resource
+	private UacRoleMapper uacRoleMapper;
 	@Resource
 	private UacUserMapper uacUserMapper;
 	@Resource
@@ -802,7 +801,16 @@ public class UacUserServiceImpl extends BaseService<UacUser> implements UacUserS
 		}
 		return authList;
 	}
-
+	@Override
+	public Collection<GrantedAuthority> loadUserRole(Long userId){
+		List<UacRoleAction> ownAuthList = uacRoleMapper.selectUserRoles(userId);
+		List<GrantedAuthority> authList = Lists.newArrayList();
+		for (UacRoleAction action : ownAuthList) {
+			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_"+action.getRoleCode());
+			authList.add(grantedAuthority);
+		}
+		return authList;
+	}
 	@Override
 	public void handlerLoginData(OAuth2AccessToken token, final SecurityUser principal, HttpServletRequest request) {
 

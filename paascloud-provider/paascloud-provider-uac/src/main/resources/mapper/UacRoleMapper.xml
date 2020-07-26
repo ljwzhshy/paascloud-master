@@ -193,4 +193,7 @@
             #{item}
         </foreach>
     </delete>
+    <select id="selectUserRoles" resultType="UacRoleAction">
+        select r.role_code from pc_uac_role r,pc_uac_role_user u where r.id =  u.role_id and u.user_id = #{userId}
+    </select>
 </mapper>

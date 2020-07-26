@@ -11,6 +11,7 @@
 
 package com.paascloud.security.core.social;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ import com.paascloud.security.core.social.support.SocialAuthenticationFilterPost
 @EnableSocial
 public class SocialConfig extends SocialConfigurerAdapter {
 
-	@Autowired
+	@Resource
 	private DataSource dataSource;
 
 	@Autowired

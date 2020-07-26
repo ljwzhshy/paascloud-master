@@ -73,7 +73,7 @@ public class TokenStoreConfig {
 		 *
 		 * @return the token store
 		 */
-		@Bean
+//		@Bean
 		public TokenStore jwtTokenStore() {
 			return new JwtTokenStore(jwtAccessTokenConverter());
 		}

@@ -131,7 +131,7 @@
         where menu_id = #{menuId}
     </delete>
     <select id="findAllPerms" resultType="com.paascloud.provider.model.dto.user.Perm">
-        select url as resource, actionCode as perm from UacAction
+        select u.url as resource, u.action_code as perm,r.role_code as roleCode from pc_uac_action u,pc_uac_role_action ua,pc_uac_role r where u.id = ua.action_id and ua.role_id = r.id
     </select>
     <select id="findActionCodeListByUserId" resultType="java.lang.String">
         SELECT
